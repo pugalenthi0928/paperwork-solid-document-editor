@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Paperwork · SOLID editor</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div class="brand-mark">P<span>.</span></div><div class="brand-label">paperwork <span>/ a SOLID learning project</span></div></div>
+    <div class="top-actions">
+      <button class="btn btn-ghost" id="loadBtn">Open saved</button>
+      <button class="btn btn-primary" id="saveBtn">Save document <span>↗</span></button>
+    </div>
+  </header>
+  <main class="workspace">
+    <aside class="editor-pane">
+      <div class="panel-heading">
+        <div class="overline">01 / COMPOSE</div>
+        <h1>Build your document.</h1>
+        <p>Each block is its own Python object. Try adding, moving, and editing them.</p>
+      </div>
+      <label class="field-label" for="titleInput">DOCUMENT TITLE</label>
+      <input class="doc-title" id="titleInput" maxlength="150" value="My first SOLID document" />
+      <div class="block-head"><span>DOCUMENT BLOCKS</span><span id="blockCount">0 BLOCKS</span></div>
+      <div class="blocks" id="blocks"></div>
+      <div class="add-card">
+        <div class="add-head">Add a new block</div>
+        <div class="add-grid">
+          <button data-add="text"><span class="add-icon">T</span><span>Text</span></button>
+          <button data-add="image"><span class="add-icon">▧</span><span>Image</span></button>
+          <button data-add="newline"><span class="add-icon">↵</span><span>Line break</span></button>
+          <button data-add="tab"><span class="add-icon">⇥</span><span>Indent</span></button>
+        </div>
+      </div>
+      <div class="lesson-note"><strong>Under the hood</strong><p><code>DocumentEditor</code> changes the blocks, <code>Document</code> keeps their order, and each <code>DocumentElement</code> renders itself.</p></div>
+    </aside>
+    <section class="preview-pane">
+      <div class="preview-header"><div><div class="overline">02 / PREVIEW</div><h2>Live document</h2></div><div class="preview-header-right"><span class="live-pill"><span></span>LIVE PREVIEW</span></div></div>
+      <div class="paper-wrap"><article class="paper" id="paper"><div class="paper-header"><span>DOCUMENT / <span id="paperId">my-document</span></span><span id="paperDate"></span></div><h2 id="paperTitle">My first SOLID document</h2><div class="paper-content" id="rendered"></div><div class="paper-footer">Created with Paperwork <span>01</span></div></article></div>
+      <div class="preview-bottom"><div class="storage-note">Saved locally on your computer · no account required</div><div class="export-actions"><button class="btn btn-ghost" id="exportHTML">Export HTML ↓</button><button class="btn btn-ghost" id="exportTXT">Export TXT ↓</button></div></div>
+    </section>
+  </main>
+  <div id="toast" role="status" aria-live="polite" class="toast"></div>
+  <dialog id="openDialog"><form method="dialog"><div class="dialog-eyebrow">DOCUMENT LIBRARY</div><h2>Open a document</h2><p>Enter the ID you used when saving.</p><label for="docId">Document ID</label><input id="docId" value="my-document" pattern="[A-Za-z0-9_-]{1,60}" maxlength="60" /><div class="dialog-actions"><button class="btn btn-ghost" value="cancel">Cancel</button><button class="btn btn-primary" value="open" id="confirmOpen">Open document</button></div></form></dialog>
+</body>
+</html>
